@@ -53,7 +53,55 @@ footer{text-align:center;padding:25px;background:#101827;color:white;margin-top:
 </section>
 <main>
 <h2 class="section" id="products">منتجات المتجر | Products</h2>
-<div class="products">
+</div>
+<section id="gallery" style="padding:20px;text-align:center">
+  <h2>جميع الصور | All Images</h2>
+  <div id="all-images"
+       style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px">
+  </div>
+</section>
+
+<script>
+const owner = "mzia2192-droid";
+const repo = "digital-store";
+
+fetch(`https://api.github.com/repos/${owner}/${repo}/contents/`)
+  .then(response => {
+    if (!response.ok) throw new Error("تعذر تحميل الصور");
+    return response.json();
+  })
+  .then(files => {
+    const box = document.getElementById("all-images");
+    const images = files.filter(file =>
+      file.type === "file" &&
+      /\.(jpg|jpeg|png|webp|gif)$/i.test(file.name)
+    );
+
+    if (images.length === 0) {
+      box.innerHTML = "لم يتم العثور على صور في المجلد الرئيسي.";
+      return;
+    }
+
+    images.forEach(file => {
+      const card = document.createElement("div");
+      const img = document.createElement("img");
+      img.src = file.download_url;
+      img.alt = file.name;
+      img.style.width = "100%";
+      img.style.borderRadius = "12px";
+
+      const name = document.createElement("p");
+      name.textContent = file.name;
+
+      card.append(img, name);
+      box.appendChild(card);
+    });
+  })
+  .catch(() => {
+    document.getElementById("all-images").textContent =
+      "تعذر تحميل الصور. تحقق من اتصال الإنترنت.";
+  });
+</script>
 <article class="card">
 <div class="symbol">🎨</div>
 <h3>حزمة تصاميم رقمية</h3>
