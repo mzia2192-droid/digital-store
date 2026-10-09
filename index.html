@@ -98,13 +98,23 @@ document.documentElement.dir=ar?'ltr':'rtl';
 document.getElementById('arabic').style.display=ar?'none':'block';
 document.getElementById('english').style.display=ar?'block':'none';
 }
+
+
 function order(product){
-const message='مرحبًا، أريد طلب: '+product;
-alert(message+' — يرجى إعداد وسيلة تواصل المتجر لإرسال الطلب.');
+
+  const phone = '9647729651761';
+  const message = 'مرحباً، أريد طلب: ' + product;
+  const url = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(message);
+  window.open(url, '_blank');
 }
+
 function contactSeller(){
-alert('يرجى إضافة رقم واتساب المتجر في الكود لتفعيل استقبال الطلبات.');
+  const phone = '9647729651761';
+  const message = 'مرحباً، أريد الاستفسار عن منتجات متجركم الرقمي.';
+  const url = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(message);
+  window.open(url, '_blank');
 }
+
 </script>
 </body>
 </html>
