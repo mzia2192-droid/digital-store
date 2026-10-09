@@ -1,2 +1,2 @@
 # digital-store
-Digital Products Store
+Digital Products Store 
